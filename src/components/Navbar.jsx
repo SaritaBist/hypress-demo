@@ -1,28 +1,13 @@
 "use client"
 
-import {Button, Divider, TextInput} from "@mantine/core";
+import { TextInput} from "@mantine/core";
 import { IconSearch,IconWallet,IconShoppingCart} from '@tabler/icons-react';
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import Logo from "@/components/Logo";
-import fetchCollections from "@/CollectionData";
 
-const NavbarPage=()=>{
 
-    const [collections, setCollections] = useState([]);
-
-    useEffect(() => {
-        const getData = async () => {
-
-            const data = await fetchCollections();
-            if (data) {
-                setCollections(data?.collections?.items);
-            }
-        };
-
-        getData();
-    }, []);
-
+const NavbarPage=({collections})=>{
 
     const [dropdownOpen, setDropdownOpen] = useState(false);
 

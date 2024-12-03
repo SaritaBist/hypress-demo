@@ -28,13 +28,13 @@ const OurServices = () => {
         }
     ]
     return (
-        <div className="max-w-[95vw] mx-auto mt-12">
+        <div className="max-w-[95vw] mx-auto mt-20">
             <div className="text-4xl ">Our Services</div>
 
               <Grid className="mt-6" gutter="xl">
                   {
                       ourServices?.map((item,index)=>(
-                          <Grid.Col span={6} key={index}>
+                          <Grid.Col span={{base:12 ,xs:12, lg:6}} key={index}>
                               <div className="flex  gap-6">
                                   <div >{item?.icon}</div>
                                   <div>

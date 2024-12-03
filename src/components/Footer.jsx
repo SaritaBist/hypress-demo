@@ -1,24 +1,15 @@
-"use client"
+
 import Logo from "@/components/Logo";
 import SocialMediaIcons from "@/components/SocialMediaIcons";
 import fetchCollections from "@/CollectionData";
-import {useEffect, useState} from "react";
 
-const Footer = () => {
 
-    const [collections, setCollections] = useState([]);
+const Footer = async () => {
 
-    useEffect(() => {
-        const getData = async () => {
+    const data = await fetchCollections();
+    const collections=data?.collections?.items;
 
-            const data = await fetchCollections();
-            if (data) {
-                setCollections(data?.collections?.items);
-            }
-        };
 
-        getData();
-    }, []);
 
 
     return (
