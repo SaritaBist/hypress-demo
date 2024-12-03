@@ -8,6 +8,9 @@ const ShopByCategory = async () => {
     const data = await fetchCollections();
     const collections=data?.collections?.items;
 
+   const enCodeUrl= (str)=>{
+       return str.replace(' ','-')
+   };
 
 
     return (
@@ -16,7 +19,7 @@ const ShopByCategory = async () => {
 
             <div className="mt-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {collections?.map((collection) => (
-                    <Box key={collection.name} className="relative" component={Link}  href={`/collections/${collection.name}`}>
+                    <Box key={collection.name} className="relative" component={Link}  href={`/collections/${enCodeUrl(collection.name)}`} >
 
                         <div className="absolute top-4 left-4 bg-white px-3 py-1 w-28 rounded-3xl uppercase text-center text-sm z-10">
                             {collection.name}

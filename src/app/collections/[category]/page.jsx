@@ -1,12 +1,14 @@
-"use client"
-import {useParams} from "next/navigation";
 
 
-const SingleCategoryPage = ()=>{
-    const {category} = useParams()
-    console.log(category)
+import fetchCollections from "@/CollectionData";
+import ViewCategoryList from "@/components/ViewCategoryList";
+
+
+const SingleCategoryPage = async ()=>{
+    const data = await fetchCollections();
+    const collections = data?.collections?.items || [];
     return(<>
-        hello
+        <ViewCategoryList collections={collections}/>
     </>)
 }
 
