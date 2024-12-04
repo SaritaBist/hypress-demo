@@ -23,14 +23,14 @@ const NavbarPage = ({ collections }) => {
 
     return (
         <>
-            <div className="sticky  bg-white top-0 z-10 flex gap-2 justify-between items-center mt-2 p-2 border-2 border-t-0">
+            <div className="sticky   bg-white top-0 z-10 flex gap-2  justify-between lg:justify-around  items-center mt-2 p-2 border-2 border-t-0">
                 <div className="flex gap-8 items-center">
                     <Logo />
                     <div className=' items-center gap-1 hidden lg:flex '>
                         <IconWallet stroke={1} className='h-8 w-8' />
                         <button
                             onMouseEnter={() => toggleDropdown(true)}
-                            onMouseLeave={() => toggleDropdown(false)}
+
                             className="flex items-center gap-1 [&_button]:p-0"
                         >
                             <span className="text-black text-md font-semibold">Collections</span>
@@ -42,7 +42,8 @@ const NavbarPage = ({ collections }) => {
                         </button>
 
                         {dropdownOpen && (
-                            <div className="absolute top-16 mt-2 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-10">
+                            <div onMouseEnter={() => toggleDropdown(true)}
+                                 onMouseLeave={() => toggleDropdown(false)} className="absolute top-16 mt-1 w-64 bg-white border border-gray-200 rounded-md shadow-lg z-10">
                                 <ul className="py-2">
                                     {collections.map((item, index) => (
                                         <li
