@@ -2,14 +2,14 @@
 import Logo from "@/components/Logo";
 import SocialMediaIcons from "@/components/SocialMediaIcons";
 import fetchCollections from "@/CollectionData";
+import Link from "next/link";
+import {enCodeUrl} from "@/app/utils/encode_url";
 
 
 const Footer = async () => {
 
     const data = await fetchCollections();
     const collections=data?.collections?.items;
-
-
 
 
     return (
@@ -26,7 +26,8 @@ const Footer = async () => {
                     {
                         collections.map((item)=> (
                             <div key={item.name}>
-                                <a href="#">{item?.name}</a>
+                                <Link href={`/collections/${enCodeUrl(item.name)}`}>{item?.name}</Link>
+
                             </div>
                         ))
                     }

@@ -2,26 +2,25 @@
 import fetchCollections from "@/CollectionData";
 import {Box} from "@mantine/core";
 import Link from "next/link";
+import {enCodeUrl} from "@/app/utils/encode_url";
 
 const ShopByCategory = async () => {
 
     const data = await fetchCollections();
     const collections=data?.collections?.items;
 
-   const enCodeUrl= (str)=>{
-       return str.replace(' ','-')
-   };
+
 
 
     return (
         <div className="max-w-[95vw] mx-auto mt-20 mb-4">
             <div className="text-4xl font-normal">Shop by Category</div>
 
-            <div className="mt-10 grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {collections?.map((collection) => (
                     <Box key={collection.name} className="relative" component={Link}  href={`/collections/${enCodeUrl(collection.name)}`} >
 
-                        <div className="absolute top-4 left-4 bg-white px-3 py-1 w-28 rounded-3xl uppercase text-center text-sm z-10">
+                        <div className="absolute top-4 left-4 bg-white px-3 py-1 w-28 rounded-3xl uppercase text-center text-sm z-[3]">
                             {collection.name}
                         </div>
                         <div className="h-[50vh] flex justify-center items-center rounded-2xl">

@@ -3,13 +3,16 @@
 import { TextInput } from "@mantine/core";
 import { IconSearch, IconWallet, IconShoppingCart } from '@tabler/icons-react';
 import { useState } from "react";
-import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp,IconMenu2 } from "@tabler/icons-react";
 import Logo from "@/components/Logo";
+import NavbarDrawer from "@/components/NavbarDrawer";
+import Link from "next/link";
+import {enCodeUrl} from "@/app/utils/encode_url";
 
 const NavbarPage = ({ collections }) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
     const [searchOpen, setSearchOpen] = useState(false); // State to manage search input visibility
-
+   const [openDrawer,setOpenDrawer]=useState(false)
     const toggleDropdown = (data) => {
         setDropdownOpen(data);
     };
@@ -20,10 +23,10 @@ const NavbarPage = ({ collections }) => {
 
     return (
         <>
-            <div className="flex gap-2 justify-around items-center mt-2 p-2 border-2 border-t-0">
+            <div className="sticky  bg-white top-0 z-10 flex gap-2 justify-between items-center mt-2 p-2 border-2 border-t-0">
                 <div className="flex gap-8 items-center">
                     <Logo />
-                    <div className='flex items-center gap-1 sm:hidden lg:flex '>
+                    <div className=' items-center gap-1 hidden lg:flex '>
                         <IconWallet stroke={1} className='h-8 w-8' />
                         <button
                             onMouseEnter={() => toggleDropdown(true)}
@@ -46,15 +49,16 @@ const NavbarPage = ({ collections }) => {
                                             key={index}
                                             className="px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer"
                                         >
-                                            {item.name}
+                                            <Link href={`/collections/${enCodeUrl(item.name)}`}>{item?.name}</Link>
+
                                         </li>
                                     ))}
                                 </ul>
                             </div>
                         )}
                     </div>
-                    <div className="border border-gray-500 h-6 sm:hidden lg:flex"></div>
-                        <div className="flex items-center sm:hidden lg:flex">
+                    <div className="border border-gray-500 h-6 hidden lg:block"></div>
+                        <div className="items-center  hidden lg:flex">
                             <TextInput
                                 size="md"
                                 radius="xl"
@@ -79,15 +83,12 @@ const NavbarPage = ({ collections }) => {
                 </div>
 
                 <div className="flex gap-5 ">
-                    {
-                        !searchOpen && (
-                            <button onClick={toggleSearchInput}>
-                                <IconSearch size={24} />
-                            </button>)
-                    }
+                    <button onClick={toggleSearchInput} className="flex lg:hidden">
+                        <IconSearch size={24}/>
+                    </button>
                     <div className="flex gap-3">
-                        <IconShoppingCart stroke={1} className="h-8 w-8" />
-                        <div className="border border-gray-500 h-6"></div>
+                        <IconShoppingCart stroke={1} className="h-8 w-8"/>
+                        <div className="border border-gray-500 h-6 hidden lg:block"></div>
                     </div>
                     <a href='#'>
                         Sign in
@@ -95,6 +96,7 @@ const NavbarPage = ({ collections }) => {
                     <a href='#'>
                         Sign out
                     </a>
+                    <IconMenu2 stroke={2}  onClick={()=>setOpenDrawer(true)} className="lg:hidden"/>
                 </div>
             </div>
 
@@ -123,6 +125,7 @@ const NavbarPage = ({ collections }) => {
                         />
                     </div>
                 )}
+                <NavbarDrawer opened={openDrawer} close={()=>setOpenDrawer(false)} collections={collections}/>
             </div>
         </>
     );
