@@ -10,15 +10,13 @@ const ShopByCategory = async () => {
     const collections=data?.collections?.items;
 
 
-
-
     return (
         <div className="max-w-[95vw] mx-auto mt-20 mb-4">
             <div className="text-4xl font-normal">Shop by Category</div>
 
             <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {collections?.map((collection) => (
-                    <Box key={collection.name} className="relative" component={Link}  href={`/collections/${enCodeUrl(collection.name)}`} >
+                    <Box key={collection.name} className="relative" component={Link}  href={`/collections/${collection.slug}`} >
 
                         <div className="absolute top-4 left-4 bg-white px-3 py-1 w-28 rounded-3xl uppercase text-center text-sm z-[3]">
                             {collection.name}

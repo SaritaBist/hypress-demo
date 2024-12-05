@@ -6,6 +6,7 @@ const GET_COLLECTIONS = gql`
     collections {
       items {
         name
+        slug
         assets {
           source
         }

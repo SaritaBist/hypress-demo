@@ -1,15 +1,18 @@
 
-
-import fetchCollections from "@/CollectionData";
 import ViewCategoryList from "@/components/ViewCategoryList";
+import fetCollectionLists from "@/CollectionList";
 
 
-const SingleCategoryPage = async ()=>{
-    const data = await fetchCollections();
-    const collections = data?.collections?.items || [];
+
+const CategoryListPage =  async ({params})=>{
+    const {category}=  await  params
+     console.log("category",category)
+    const categoryList = await fetCollectionLists(category)
+      const categoryListData=categoryList.collections.items
+
     return(<>
-        <ViewCategoryList collections={collections}/>
+        <ViewCategoryList categoryListData={categoryListData} category={category}/>
     </>)
 }
 
-export  default SingleCategoryPage
+export  default CategoryListPage
