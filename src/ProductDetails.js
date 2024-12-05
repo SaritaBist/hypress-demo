@@ -3,23 +3,25 @@ import client from "@/app/lib/apollo-client";
 
 
 const GET_COLLECTIONS = gql`
-  query Query($options: CollectionListOptions) {
-  collections(options: $options) {
+  query Products($options: ProductListOptions) {
+  products(options: $options) {
     items {
-      productVariants {
+      name
+      description
+      assets {
+        source
+      }
+      variantList {
         items {
-          product {
-            name
-            slug
-            variantList {
-              items {
-                price
-              }
-            }
-            assets {
-              source
-            }
-          }
+          price
+        }
+      }
+      
+      reviews {
+        items {
+          response
+          rating
+          
         }
       }
     }
@@ -28,7 +30,7 @@ const GET_COLLECTIONS = gql`
 `;
 
 
-export default async function fetCollectionLists(filterName) {
+export default async function fetchProductDetails(filterName) {
     try {
 
         const { data } = await client.query({

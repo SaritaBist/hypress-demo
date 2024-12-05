@@ -2,12 +2,12 @@
 
 import {Box, Breadcrumbs, Rating} from "@mantine/core";
 import convertToDollar from "@/app/utils/convert_to_dollar";
+import Link from "next/link";
 
 
 
 const ViewCategoryListPage=   ({categoryListData,category})=>{
-
-  const data=categoryListData[0]?.productVariants?.items
+    const data=categoryListData[0]?.productVariants?.items
 
 
     return(
@@ -19,7 +19,7 @@ const ViewCategoryListPage=   ({categoryListData,category})=>{
                     {data?.map((item,index) => (
                         <div key={index} className="h-[70vh] w-[45] bg-[#fbfbff] flex flex-col justify-center items-center rounded-2xl ml-12 hover:shadow-2xl pb-3">
 
-                            <div className="relative group">
+                            <Box className="relative group" component={Link}  href={`/products/${item?.product?.slug}`}>
                                 <img
                                     src={item?.product?.assets[0].source}
                                     className="h-[300px] w-[300px] object-cover transition-transform duration-300 ease-in-out group-hover:scale-110 rounded-xl"
@@ -30,7 +30,7 @@ const ViewCategoryListPage=   ({categoryListData,category})=>{
                                     <div className={'font-semibold px-4'}>{item?.product?.name} {index + 1}</div>
                                     <Rating fractions={2} defaultValue={3.5}  className={'p-2'}/>
                                 </div>
-                            </div>
+                            </Box>
 
                         </div>
 
